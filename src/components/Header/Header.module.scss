@@ -1,0 +1,403 @@
+// @type
+
+.container {
+    width: 72%;
+    margin: 0 auto;
+
+	@media (max-width: 1790px) {
+		width: 90%;
+	}
+
+	@media (max-width: 1440px) {
+		width: 95%;
+	}
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+
+	@media (max-width: 900px) {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 20px;
+		gap: 10px;
+	}
+
+
+	.communication {
+		display: flex;
+		padding: 14px 0px;
+
+		@media (max-width: 900px) {
+			gap: 80px;
+		}
+		
+
+		.textContent {
+			text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+			font-family: 'Inter';
+			font-style: normal;
+
+			p {
+				font-weight: 600;
+				font-size: 14px;
+				line-height: 18px;
+				color: #111111;
+
+				@media (max-width: 1350px) {
+					font-size: 13px;
+					line-height: 10px;
+				}
+
+				@media (max-width: 1050px) {
+					font-size: 12px;
+				}
+
+				
+			}
+
+			span {
+				font-family: 'Inter';
+				font-weight: 400;
+				font-size: 14px;
+				line-height: 18px;
+				color: #3F4E65;
+
+				@media (max-width: 1350px) {
+					font-size: 11px;
+					line-height: 10px;
+				}
+
+				
+
+			}
+		}
+
+		.adress {
+			display: flex;
+			gap: 18px;
+			align-items: center;
+			border-right: 1px dashed rgba(0, 0, 0, 0.05);
+			padding: 0px 20px;
+		}
+
+		.mail {
+			display: flex;
+			align-items: center;
+			gap: 18px;
+			padding: 0px 20px;
+
+		}
+	}
+
+	.navList {
+		display: flex;
+		align-items: center;
+		
+		.navItem {
+			font-family: 'Inter';
+			font-style: normal;
+			font-weight: 400;
+			line-height: 150%;
+			font-size: 16px;
+			color: #3F4E65;
+
+			@media (max-width: 1350px) {
+				font-size: 14px;
+			}
+
+			@media (max-width: 1050px) {
+				font-size: 13px;
+			}
+
+			&:not(:first-of-type) {
+				padding: 0px 20px;
+			}
+
+			&:first-of-type {
+				padding-right: 20px;
+			}
+
+			&:not(:last-of-type) {
+				border-right: 1px dashed rgba(63, 78, 101, 0.1);
+			}
+		}
+	}
+}
+
+.mainContent {
+	border-top: 1px solid rgba(63, 78, 101, 0.2);
+	border-bottom: 1px solid rgba(63, 78, 101, 0.2);
+	padding: 10px 0; 
+	.container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		@media(max-width: 1200px) {
+			gap: 5px;
+			justify-content: space-evenly;
+			display: grid;
+			grid-template-areas: 
+			"catalog search priceList"
+			"catalog support cart";
+		}
+	}
+
+
+	.logo {
+		@media (max-width: 1350px) {
+			width: 140px;
+		}
+
+		@media(max-width: 1200px) {
+			grid-area: logotype;
+			
+		}
+	}
+
+	button {
+		width: 192px;
+		padding: 21px 0;
+		background-color: #FFC85E;
+		border-radius: 79px;
+		cursor: pointer;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 13px;
+
+		font-family: 'Inter';
+		font-style: normal;
+		font-weight: 700;
+		font-size: 14px;
+		line-height: 17px;
+		color: #FFFFFF;
+
+		@media (max-width: 1350px) {
+			width: 160px;
+			padding: 15px 0;
+		}
+
+		@media (max-width: 1200px) {
+			width: 220px;
+			padding: 15px 0;
+		}
+	}
+
+	.catalogButton {
+		@media(max-width: 1200px) {
+			grid-area: catalog;
+		}
+	}
+
+	.priceListButton {
+		@media(max-width: 1200px) {
+			grid-area: priceList;
+		}
+
+	}
+	.search {
+		position: relative;
+
+		@media(max-width: 1200px) {
+			grid-area: search;
+		}
+
+		input {
+			background: #EDEDED;
+			border-radius: 36px;	
+			padding: 21px;
+			padding-right: 60px;
+	
+			font-family: 'Inter';
+			font-style: normal;
+			font-weight: 400;
+			font-size: 13px;
+			line-height: 150%;
+			color: rgb(92, 99, 112);
+			
+			@media (max-width: 1350px) {
+				width: 150px;
+				padding: 15px;
+				padding-right: 60px;
+			}
+
+			&::placeholder {
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 400;
+				font-size: 12px;
+				line-height: 150%;
+				color: rgba(92, 99, 112, 0.6);
+			}
+		}
+
+		img {
+			background: #FFC85E;
+			padding: 12px 10px 10px 12px;
+			border-radius: 1000px;
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			cursor: pointer;
+
+			@media (max-width: 1350px) {
+				top: 8px;
+				padding: 8px 6px 6px 8px;
+			}
+		}
+	}
+
+	.support {
+		display: flex;
+		align-items: center;
+		gap: 15px;
+
+		@media(max-width: 1200px) {
+			grid-area: support;
+		}
+
+		.textContent {
+			text-align: end;
+			display: flex;
+			flex-direction: column;
+			gap: 5px;
+			font-family: 'Inter';
+			font-style: normal;
+
+			p {
+				font-weight: 600;
+				font-size: 14px;
+				line-height: 21px;
+				color: #111111;
+
+				@media (max-width: 1350px) {
+					font-size: 13px;
+					line-height: 16px;
+				}
+			}
+			span {
+				font-weight: 300;
+				font-size: 12px;
+				line-height: 18px;
+				color: #3F4E65;
+
+				@media (max-width: 1350px) {
+					font-size: 11px;
+					line-height: 13px;
+				}
+			}
+			a {
+				display: block;
+				font-weight: 400;
+				font-size: 10px;
+				line-height: 15px;
+				text-decoration-line: underline;
+				color: #3F4E65;
+
+				@media (max-width: 1350px) {
+					font-size: 9px;
+					line-height: 10px;
+				}
+			}
+		}
+		.avatar {
+			position: relative;
+
+			img:first-of-type {
+				border-radius: 50%;
+				@media (max-width: 1350px) {
+					height: 80px;
+				}
+			}
+
+			img:last-of-type {
+				position: absolute;
+				top: 26px;
+				right: 4px;
+
+				@media (max-width: 1350px) {
+					top: 23px;
+				}
+			}
+		}
+	}
+
+	.cart {
+		display: flex;
+		align-items: center;
+		gap: 24px;
+
+		@media(max-width: 1200px) {
+			grid-area: cart;
+			justify-content: center;
+		}
+
+		@media (max-width: 1350px) {
+			gap: 15px;
+		}
+
+		.cartImg {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+			@media (max-width: 1350px) {
+				height: 35px;
+				width: 35px;
+			}
+			p {
+				position: absolute;
+				top: -1px;
+				right: -10px;
+				padding: 2px 6px;
+				border: 3px solid #fff;
+				border-radius: 1000px;
+				background: #FFC85E;
+
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 700;
+				font-size: 14px;
+				line-height: 17px;
+				color: #FFFFFF;
+
+				text-align: center;
+				
+				@media (max-width: 1350px) {
+					top: -8px;
+				}
+
+			}
+		}
+
+		.textContent {
+			p {
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 300;
+				font-size: 12px;
+				line-height: 150%;
+				color: #3F4E65;
+				
+			}
+	
+			span {
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 600;
+				font-size: 14px;
+				line-height: 150%;
+				color: #111111;
+	
+	
+			}
+
+		}
+
+	}
+}
