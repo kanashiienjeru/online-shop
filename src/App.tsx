@@ -12,7 +12,6 @@ import HeaderMobile from "./components/Header/HeaderMobile";
 import FooterMobile from "./components/Footer/FooterMobile";
 
 function App() {
-
   const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
    const handleResizeWindow = () => setWidth(window.innerWidth);
