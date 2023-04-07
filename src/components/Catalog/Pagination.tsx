@@ -13,6 +13,7 @@ const Pagination = ({ productsPerPage, totalProducts, setCurrentPage, currentPag
     for(let i=1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
         pageNumbers.push(i)
     }
+    
     return(
         <div className={styles.pagination}>
             <img onClick={() => {

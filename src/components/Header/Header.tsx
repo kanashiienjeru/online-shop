@@ -2,8 +2,27 @@ import styles from "./Header.module.scss";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
 
+export const navigationItems: {id: number, content: string}[] = [
+  {
+    id: 1,
+    content: 'О компании'
+  },
+  {
+    id: 2,
+    content: 'Доставка и оплата'
+  },
+  {
+    id: 3,
+    content: 'Возврат'
+  },
+  {
+    id: 4,
+    content: 'Контакты'
+  }
+] 
 const Header = () => {
-  const cartSize = useAppSelector((state) => state.products.cartItems.length);
+
+  const cartSize = useAppSelector(state => state.products.cartItems.length);
 
   return (
     <>
@@ -26,24 +45,17 @@ const Header = () => {
             </div>
           </div>
           <ul className={styles.navList}>
-            <li className={styles.navItem}>
-              <a href="/">О компании</a>
-            </li>
-            <li className={styles.navItem}>
-              <a href="/">Доставка и оплата</a>
-            </li>
-            <li className={styles.navItem}>
-              <a href="/">Возврат</a>
-            </li>
-            <li className={styles.navItem}>
-              <a href="/">Контакты</a>
-            </li>
+            {navigationItems.map(navItem => (
+              <li key={navItem.id} className={styles.navItem}>
+                <a href="/">{navItem.content}</a>
+              </li>)
+            )}
           </ul>
         </nav>
       </div>
       <div className={styles.mainContent}>
         <div className={styles.container}>
-          <Link to="/">
+          <Link to="/" id="logoLink">
             <img className={styles.logo} src="/images/logo/darkLogo.svg" alt="logo" />
           </Link>
           <Link to="/catalog">
@@ -62,7 +74,7 @@ const Header = () => {
               <span>время работы: 9:00-20:00</span>
               <a href="/">Заказать звонок</a>
             </div>
-            <div className={styles.avatar}>
+            <div className={styles.supportAvatar}>
               <img src="/images/support.png" alt="support" />
               <img src="/images/online-status.svg" alt="status" />
             </div>
@@ -71,7 +83,7 @@ const Header = () => {
             Прайс-лист
             <img src="/images/icons/download.svg" alt="download" />
           </button>
-          <Link to="/cart">
+          <Link to="/cart" id="cartLink">
             <div className={styles.cart}>
               <div className={styles.cartImg}>
                 <img src="/images/icons/cart.svg" alt="cart" />

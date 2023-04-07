@@ -3,20 +3,21 @@ import { Link } from "react-router-dom";
 import { addToCart, deleteFromCart } from "../../redux/Slices/products";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
-const Card = ({ id }: { id: number }) => {
+
+const Card = ({ id, onlyWatch }: { id: number, onlyWatch?: boolean }) => {
   const dispatch = useAppDispatch();
-  const product = useAppSelector(
-    (state) => state.products.all.filter((e) => e.id === id)[0]
-  );
+
+  const product = useAppSelector(state => state.products.all.filter((e) => e.id === id)[0]);
   const cart = useAppSelector(state => state.products.cartItems)
+
   return (
     <>
-      {product ? (
+      {product && (
         <div className={styles.productWrapper}>
-          <div className={styles.product}>
-            <Link to={`/catalog/${product.id}`}>
-              <img src={product.imageUrl} alt="product-image" />
-            </Link>
+          <div data-testid="product" className={styles.product}>
+            {onlyWatch ? (<img src={product.imageUrl} alt="product" className={styles.productImg} />) : <Link to={`/catalog/${product.id}`}>
+              <img src={product.imageUrl} className={styles.productImg} alt="product" />
+            </Link>}
             <div className={styles.textContent}>
               <p>
                 <img
@@ -36,9 +37,11 @@ const Card = ({ id }: { id: number }) => {
                   ? " г"
                   : ""}
               </p>
-              <Link to={`/catalog/${product.id}`}>
+              {onlyWatch ? (<p className={styles.title}>{product.name}</p>) : (
+                <Link to={`/catalog/${product.id}`}>
                 <p className={styles.title}>{product.name}</p>
               </Link>
+              )}
               <p>
                 <span>Штрихкод:</span> {product.barcode}
               </p>
@@ -51,24 +54,28 @@ const Card = ({ id }: { id: number }) => {
             </div>
             <div className={styles.footer}>
               <p>{product.price} ₽</p>
-              {cart.find(e => e.id === product.id) ? (
-                <button className={styles.alreadyAdd} onClick={() => dispatch(deleteFromCart(product.id))}>
-                  Добавлено!
+              {onlyWatch ? (<button className={styles.add}>В корзину <img src="/images/icons/product-cart.svg" alt="" /></button>) : (
+                cart.find(e => e.id === product.id) ? (
+                  <button id="alreadyAddButton" className={styles.alreadyAdd} onClick={() => dispatch(deleteFromCart(product.id))} role="button">
+                    Добавлено!
+                  </button>
+                ) : (
+                  <button className={styles.add}
+                  onClick={() => {
+                    dispatch(addToCart({ ...product, count: 1 }));
+                  }}
+                  role="button"
+                  id="addButton"
+                >
+                  В корзину
+                  <img src="/images/icons/product-cart.svg" alt="" />
                 </button>
-              ) : (
-                <button className={styles.add}
-                onClick={() => {
-                  dispatch(addToCart({ ...product, count: 1 }));
-                }}
-              >
-                В корзину
-                <img src="/images/icons/product-cart.svg" alt="" />
-              </button>
+                )
               )}
             </div>
           </div>
         </div>
-      ) : null}
+      )}
     </>
   );
 };

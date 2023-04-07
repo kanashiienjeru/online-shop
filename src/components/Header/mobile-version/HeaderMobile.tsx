@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../../redux/hooks";
 import { Link } from "react-router-dom";
 import styles from "./HeaderMobile.module.scss";
+import { navigationItems } from "../Header";
 
 const HeaderMobile = () => {
   const cartSize = useAppSelector((state) => state.products.cartItems.length);
@@ -18,8 +19,8 @@ const HeaderMobile = () => {
             <img onClick={() => closeBurger()} className={styles.burger} src="/images/white-x.svg" alt="x" />
           ) : (
             <img onClick={() => {
-              setBurgerOpen(true)
-              document.getElementsByTagName('body')[0].style.overflowY = 'hidden'
+              setBurgerOpen(true);
+              document.getElementsByTagName('body')[0].style.overflow="hidden";
             }} className={styles.burger} src="/images/burger.svg" alt="menu" />
           )}
           <div className={`${styles.burgerOverlay} ${burgerOpen ? `${styles.show}` : ''}`}>
@@ -56,10 +57,7 @@ const HeaderMobile = () => {
               </div>
               <div className={styles.menu}>
                 <h1>Меню сайта:</h1>
-                <p>О компании</p>
-                <p>Доставка и оплата</p>
-                <p>Возврат</p>
-                <p>Контакты</p>
+                {navigationItems.map(navItem => <p key={navItem.id}>{navItem.content}</p> )}
                 <button>
                   Прайс-лист
                   <img src="/images/icons/download.svg" alt="download" />

@@ -249,7 +249,7 @@
                 align-items: center;
                 font-family: 'Inter';
                 font-style: normal;
-
+                
                 @media (max-width: 680px) {
                     justify-content: center;
                     width: 100%;
@@ -348,9 +348,8 @@
                         font-size: 16px;
                         border-right: 1px dashed rgba(63, 78, 101, 0.2);
                         border-left: 1px dashed rgba(63, 78, 101, 0.2);
-                        margin-right: 10px;
-                        flex: 1 auto;
                         min-width: 60px;
+                        text-align: center;
                     }
                 }
             }

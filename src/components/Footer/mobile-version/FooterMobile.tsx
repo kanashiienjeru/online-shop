@@ -1,5 +1,5 @@
 import styles from './FooterMobile.module.scss'
-
+import { navigationItems } from '../../Header/Header'
 const FooterMobile = () => {
     return(
     <div className={styles.footer}>
@@ -26,10 +26,7 @@ const FooterMobile = () => {
         <div className={styles.links}>
             <div>
                 <h4 className={styles.title}>Меню сайта:</h4>
-                <a href="/">О компании</a>
-                <a href="/">Доставка и оплата</a>
-                <a href="/">Возврат</a>
-                <a href="/">Контакты</a>
+                {navigationItems.map(navItem => <a key={navItem.id} href="/">{navItem.content}</a>)}
             </div>
 
             <div>

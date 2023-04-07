@@ -12,7 +12,7 @@ declare const styles: {
   readonly "priceListButton": string;
   readonly "search": string;
   readonly "support": string;
-  readonly "avatar": string;
+  readonly "supportAvatar": string;
   readonly "cart": string;
   readonly "cartImg": string;
 };

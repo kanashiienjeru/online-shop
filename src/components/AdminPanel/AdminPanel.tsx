@@ -11,12 +11,12 @@ const AdminPanel = ({ types }: {types: string[]}) => {
       <div className={styles.buttons}>
         <button onClick={() => {
           setAdd(!add)
-          document.getElementsByTagName("body")[0].style.overflowY ="hidden";
-          }}>Добавить товар</button>
+          document.getElementsByTagName("body")[0].style.overflow ="hidden";
+          }} role="button" id="addWindow">Добавить товар</button>
         <button onClick={() => {
           setEdit(!edit)
-          document.getElementsByTagName("body")[0].style.overflowY ="hidden";
-          }}>Редактировать товар</button>
+          document.getElementsByTagName("body")[0].style.overflow ="hidden";
+          }} id="editWindow">Редактировать товар</button>
       </div>
 
       <div className={`${styles.overlay} ${add || edit ? `${styles.show}` : ""}`}>

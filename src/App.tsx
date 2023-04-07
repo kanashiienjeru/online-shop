@@ -8,8 +8,8 @@ import ProductPage from "./components/ProductPage/ProductPage";
 import Footer from "./components/Footer/Footer";
 import { Routes, Route } from "react-router-dom";
 import Cart from "./components/Cart/Cart";
-import HeaderMobile from "./components/Header/HeaderMobile";
-import FooterMobile from "./components/Footer/FooterMobile";
+import HeaderMobile from "./components/Header/mobile-version/HeaderMobile";
+import FooterMobile from "./components/Footer/mobile-version/FooterMobile";
 
 function App() {
   const [width, setWidth] = useState(window.innerWidth);
@@ -23,7 +23,7 @@ function App() {
   }, []);
 
   return (
-    <div className={styles.App}>
+      <div className={styles.App}>
       <header>
         {width > 680 ? (<Header />) : (<HeaderMobile />)}
       </header>

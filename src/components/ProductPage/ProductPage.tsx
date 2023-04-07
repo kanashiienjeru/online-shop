@@ -6,17 +6,21 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { addToCart, deleteFromCart } from "../../redux/Slices/products";
 
 const ProductPage = ({ width }: { width: number }) => {
-  const products = useAppSelector((state) => state.products.all);
+  const dispatch = useAppDispatch();
   const { id } = useParams();
-  const cart = useAppSelector((state) => state.products.cartItems);
+
+  const products = useAppSelector(state => state.products.all);
   const product = products.find((e) => e.id == Number(id));
+  const cart = useAppSelector(state => state.products.cartItems);
+
+
   const [count, setCount] = useState(1);
   const [isDescOpen, setIsDescOpen] = useState(false)
   const [isSpecOpen, setIsSpecOpen] = useState(false)
-  const dispatch = useAppDispatch();
+
   return (
     <div>
-      {product ? (
+      {product && (
         <div className={styles.container}>
           {width > 680 ? (
             <ul className={styles.navigation}>
@@ -40,7 +44,7 @@ const ProductPage = ({ width }: { width: number }) => {
             </Link>
           )}
 
-          <div className={styles.product}>
+          <div data-testid="product" className={styles.product}>
             <img src={product.imageUrl} height={470} alt="productImage" />
             <div className={styles.content}>
               <span>В наличии</span>
@@ -52,8 +56,8 @@ const ProductPage = ({ width }: { width: number }) => {
                       product.typeOfSize === "Объём"
                         ? "/images/icons/bottle.svg"
                         : product.typeOfSize === "Вес"
-                        ? "/images/icons/box.svg"
-                        : ""
+                          ? "/images/icons/box.svg"
+                          : ""
                     }
                     alt="size"
                   />
@@ -61,8 +65,8 @@ const ProductPage = ({ width }: { width: number }) => {
                   {product.typeOfSize === "Объём"
                     ? " мл"
                     : product.typeOfSize === "Вес"
-                    ? " г"
-                    : ""}
+                      ? " г"
+                      : ""}
                 </p>
               )}
               {width > 680 ? (
@@ -74,11 +78,12 @@ const ProductPage = ({ width }: { width: number }) => {
                         onClick={() =>
                           setCount(() => (count > 1 ? count - 1 : count))
                         }
+                        id="minus"
                       >
                         -
                       </button>
-                      <p>{count}</p>
-                      <button onClick={() => setCount(() => count + 1)}>
+                      <p id="count">{count}</p>
+                      <button onClick={() => setCount(() => count + 1)} id="plus">
                         +
                       </button>
                     </div>
@@ -95,6 +100,7 @@ const ProductPage = ({ width }: { width: number }) => {
                         onClick={() => {
                           dispatch(addToCart({ ...product, count: count }));
                         }}
+                        data-testid="addButton"
                       >
                         В корзину
                         <img src="/images/icons/product-cart.svg" alt="cart" />
@@ -136,10 +142,11 @@ const ProductPage = ({ width }: { width: number }) => {
 
                   <div className={styles.ad}>
                     <div className={styles.adHead}>
-                    {cart.find((e) => e.id === product.id) ? (
+                      {cart.find((e) => e.id === product.id) ? (
                         <button
                           className={`${styles.alreadyAdd}`}
                           onClick={() => dispatch(deleteFromCart(product.id))}
+                          data-testid="alreadyAddButton"
                         >
                           Добавлено!
                         </button>
@@ -187,96 +194,81 @@ const ProductPage = ({ width }: { width: number }) => {
 
               <div className={styles.description}>
                 {width > 680 ? (
-                <>
-                  <h3>Описание</h3>
-                  <p>{product.description}</p>
-                </>
+                  <>
+                    <h3>Описание</h3>
+                    <p>{product.description}</p>
+                  </>
                 ) : (
                   <>
-                  <h3 onClick={() => setIsDescOpen(!isDescOpen)} className={`${isDescOpen ? `${styles.show}` : ''}`}>Описание</h3>
-                  {isDescOpen && <p>{product.description}</p>}
+                    <h3 onClick={() => setIsDescOpen(!isDescOpen)} className={`${isDescOpen ? `${styles.show}` : ''}`}>Описание</h3>
+                    {isDescOpen && <p>{product.description}</p>}
                   </>
                 )}
               </div>
 
               {width > 680 ? (
                 <div className={styles.specifications}>
-                <h3>Характеристики</h3>
-                <p>
-                  Назначение: <span>{product.manufacturer}</span>
-                </p>
-                <p>
-                  Тип: <span>{product.type.join(", ")}</span>
-                </p>
-                <p>
-                  Производитель: <span>{product.manufacturer}</span>
-                </p>
-                <p>
-                  Бренд: <span>{product.brand}</span>
-                </p>
-                <p>
-                  Артикул: <span>{product.barcode.toString().slice(0, 6)}</span>
-                </p>
-                <p>
-                  Штрихкод: <span>{product.barcode}</span>
-                </p>
-                {product.typeOfSize === "Объём" && (
+                  <h3>Характеристики</h3>
                   <p>
-                    Объём: <span>{product.size} мл</span>
+                    Назначение: <span>{product.manufacturer}</span>
                   </p>
-                )}
-                {product.typeOfSize === "Вес" && (
                   <p>
-                    Вес: <span>{product.size} г</span>
+                    Тип: <span>{product.type.join(", ")}</span>
                   </p>
-                )}
-                <p>
-                  Кол-во в коробке: <span>-</span>
-                </p>
-              </div>
-              ) : ( 
+                  <p>
+                    Производитель: <span>{product.manufacturer}</span>
+                  </p>
+                  <p>
+                    Бренд: <span>{product.brand}</span>
+                  </p>
+                  <p>
+                    Артикул: <span>{product.barcode.toString().slice(0, 6)}</span>
+                  </p>
+                  <p>
+                    Штрихкод: <span>{product.barcode}</span>
+                  </p>
+                  {product.typeOfSize === "Объём" && (
+                    <p>
+                      Объём: <span>{product.size} мл</span>
+                    </p>
+                  )}
+                  {product.typeOfSize === "Вес" && (
+                    <p>
+                      Вес: <span>{product.size} г</span>
+                    </p>
+                  )}
+                  <p>
+                    Кол-во в коробке: <span>-</span>
+                  </p>
+                </div>
+              ) : (
                 <div className={styles.specifications}>
-                <h3 onClick={() => setIsSpecOpen(!isSpecOpen)} className={`${isSpecOpen ? `${styles.show}` : ''}`}>Характеристики</h3>
-                {isSpecOpen && (
-                  <>
-                  <p>
-                  Назначение: <span>{product.manufacturer}</span>
-                </p>
-                <p>
-                  Тип: <span>{product.type.join(", ")}</span>
-                </p>
-                <p>
-                  Производитель: <span>{product.manufacturer}</span>
-                </p>
-                <p>
-                  Бренд: <span>{product.brand}</span>
-                </p>
-                <p>
-                  Артикул: <span>{product.barcode.toString().slice(0, 6)}</span>
-                </p>
-                <p>
-                  Штрихкод: <span>{product.barcode}</span>
-                </p>
-                {product.typeOfSize === "Объём" && (
-                  <p>
-                    Объём: <span>{product.size} мл</span>
-                  </p>
-                )}
-                {product.typeOfSize === "Вес" && (
-                  <p>
-                    Вес: <span>{product.size} г</span>
-                  </p>
-                )}
-                <p>
-                  Кол-во в коробке: <span>-</span>
-                </p></>
-                )}
-              </div>
+                  <h3 onClick={() => setIsSpecOpen(!isSpecOpen)} className={`${isSpecOpen ? `${styles.show}` : ''}`}>Характеристики</h3>
+                  {isSpecOpen && (
+                    <>
+                      <p>Назначение: <span>{product.manufacturer}</span></p>
+                      <p>Тип: <span>{product.type.join(", ")}</span></p>
+                      <p>Производитель: <span>{product.manufacturer}</span></p>
+                      <p>Бренд: <span>{product.brand}</span></p>
+                      <p>Артикул: <span>{product.barcode.toString().slice(0, 6)}</span></p>
+                      <p>Штрихкод: <span>{product.barcode}</span></p>
+                      {product.typeOfSize === "Объём" && (
+                        <p>Объём: <span>{product.size} мл</span></p>
+                      )}
+                      {product.typeOfSize === "Вес" && (
+                        <p>
+                          Вес: <span>{product.size} г</span>
+                        </p>
+                      )}
+                      <p>Кол-во в коробке: <span>-</span></p>
+                    </>
+                  )}
+                </div>
               )}
             </div>
           </div>
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

@@ -2,6 +2,7 @@
   "name": "online-shop",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://kanashiienjeru.github.io",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
@@ -11,6 +12,7 @@
     "@types/node": "^16.18.16",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
@@ -25,12 +27,27 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build",
+    "wdio": "wdio run ./wdio.conf.js",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
     ]
   },
   "browserslist": {
@@ -46,6 +63,24 @@
     ]
   },
   "devDependencies": {
-    "typescript-plugin-css-modules": "^4.2.3"
+    "@storybook/addon-essentials": "^7.0.2",
+    "@storybook/addon-interactions": "^7.0.2",
+    "@storybook/addon-links": "^7.0.2",
+    "@storybook/blocks": "^7.0.2",
+    "@storybook/preset-create-react-app": "^7.0.2",
+    "@storybook/react": "^7.0.2",
+    "@storybook/react-webpack5": "^7.0.2",
+    "@storybook/testing-library": "^0.0.14-next.2",
+    "@wdio/cli": "^8.7.0",
+    "@wdio/local-runner": "^8.7.0",
+    "@wdio/mocha-framework": "^8.7.0",
+    "@wdio/spec-reporter": "^8.7.0",
+    "babel-plugin-named-exports-order": "^0.0.2",
+    "chromedriver": "^112.0.0",
+    "prop-types": "^15.8.1",
+    "storybook": "^7.0.2",
+    "typescript-plugin-css-modules": "^4.2.3",
+    "wdio-chromedriver-service": "^8.1.1",
+    "webpack": "^5.78.0"
   }
 }

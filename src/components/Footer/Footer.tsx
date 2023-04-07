@@ -1,4 +1,5 @@
 import styles from "./Footer.module.scss";
+import { navigationItems } from "../Header/Header";
 
 const Footer = () => {
   return (
@@ -14,57 +15,54 @@ const Footer = () => {
           <p>Подпишись на скидки и акции</p>
           <div className={styles.input}>
             <input placeholder="Введите ваш E-mail" type="email" />
-              <img src="/images/arrows/arrow.svg" alt="arrow" />
+            <img src="/images/arrows/arrow.svg" alt="arrow" />
           </div>
         </div>
 
         <div className={styles.menu}>
-            <h4 className={styles.title}>Меню сайта:</h4>
-            <p>О компании</p>
-            <p>Доставка и оплата</p>
-            <p>Возврат</p>
-            <p>Контакты</p>
+          <h4 className={styles.title} role="heading">Меню сайта:</h4>
+          {navigationItems.map(navItem => <p key={navItem.id}>{navItem.content}</p>)}
         </div>
 
         <div className={styles.categories}>
-            <h4 className={styles.title}>Категории:</h4>
-            <p>Бытовая химия</p>
-            <p>Косметика и гигиена</p>
-            <p>Товары для дома</p>
-            <p>Товары для детей и мам</p>
-            <p>Посуда</p>
+          <h4 className={styles.title} role="heading">Категории:</h4>
+          <p>Бытовая химия</p>
+          <p>Косметика и гигиена</p>
+          <p>Товары для дома</p>
+          <p>Товары для детей и мам</p>
+          <p>Посуда</p>
         </div>
 
         <div className={styles.priceList}>
-            <h4 className={styles.title}>Скачать прайс-лист:</h4>
-            <button>
-                Прайс-лист
-                <img src="/images/icons/download.svg" alt="download" />
-            </button>
-            <div className={styles.socials}>
+          <h4 className={styles.title} role="heading">Скачать прайс-лист:</h4>
+          <button>
+            Прайс-лист
+            <img src="/images/icons/download.svg" alt="download" />
+          </button>
+          <div className={styles.socials}>
             <p>Связь в мессенджерах:</p>
             <div className={styles.socialsList}>
-                <img src="/images/footer-pictures/whatsapp.png" alt="whatsapp" />
-                <img src="/images/footer-pictures/telegram.png" alt="telegram" />
+              <img src="/images/footer-pictures/whatsapp.png" alt="whatsapp" />
+              <img src="/images/footer-pictures/telegram.png" alt="telegram" />
             </div>
-        </div>
+          </div>
         </div>
 
         <div className={styles.contacts}>
-            <h4 className={styles.title}>Контакты:</h4>
-            <p>+7 (777) 490-00-91</p>
-            <p>время работы: 9:00-20:00</p>
-            <a href="">Заказать звонок</a>
+          <h4 className={styles.title} role="heading">Контакты:</h4>
+          <p>+7 (777) 490-00-91</p>
+          <p>время работы: 9:00-20:00</p>
+          <a href="">Заказать звонок</a>
 
-            <div className={styles.mail}>
-                <p>opt.sultan@mail.ru </p>
-                <p>На связи в любое время</p>
-            </div>
+          <div className={styles.mail}>
+            <p>opt.sultan@mail.ru </p>
+            <p>На связи в любое время</p>
+          </div>
 
-            <div className={styles.cards}>
-                <img src="/images/footer-pictures/visa.png" alt="visa" />
-                <img src="/images/footer-pictures/mastercard.png" alt="mastercard" />
-            </div>
+          <div className={styles.cards}>
+            <img src="/images/footer-pictures/visa.png" alt="visa" />
+            <img src="/images/footer-pictures/mastercard.png" alt="mastercard" />
+          </div>
         </div>
       </div>
     </div>

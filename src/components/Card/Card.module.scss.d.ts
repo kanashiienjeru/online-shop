@@ -1,6 +1,7 @@
 declare const styles: {
   readonly "productWrapper": string;
   readonly "product": string;
+  readonly "productImg": string;
   readonly "textContent": string;
   readonly "title": string;
   readonly "footer": string;
